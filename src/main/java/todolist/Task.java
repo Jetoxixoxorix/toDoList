@@ -8,19 +8,25 @@ import javax.persistence.Id;
 import java.util.Date;
 
 @Entity
-public class ToDo {
+public class Task {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
     private String description;
-    private Date date;
+    private String date;
     private boolean status;
 
-    public ToDo(int id, String description, Date date, boolean status){
-        this.id = id;
+
+    public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setDate(String date) {
         this.date = date;
+    }
+
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
@@ -33,7 +39,7 @@ public class ToDo {
         return description;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 

@@ -16,7 +16,7 @@ import java.util.Date;
 
 
 @Controller
-@RequestMapping(path = "/task")
+@RequestMapping
 public class MainController {
 
     @Autowired

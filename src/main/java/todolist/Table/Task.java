@@ -11,7 +11,7 @@ public class Task {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+    private long id;
     private String description;
     private String createdAt;
     private String updatedAt;
@@ -20,7 +20,7 @@ public class Task {
 
 
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -63,6 +63,4 @@ public class Task {
     public void setArchived(boolean isArchived) {
         this.isArchived = isArchived;
     }
-
-
 }

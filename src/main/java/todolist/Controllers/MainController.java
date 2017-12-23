@@ -10,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import todolist.Table.Task;
 import todolist.Table.TaskRepository;
 
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 
 @Controller
 @RequestMapping(path = "/task")
@@ -21,8 +23,9 @@ public class MainController {
     private TaskRepository taskRepository;
 
     @GetMapping(path = "/add")
-    public @ResponseBody String addNewTask(@RequestParam String description){
-        
+    public @ResponseBody
+    String addNewTask(@RequestParam String description) {
+
         Task task = new Task();
         task.setDescription(description);
         task.setCreatedAt(getDate());
@@ -34,24 +37,30 @@ public class MainController {
     }
 
     @GetMapping(path = "/all")
-    public @ResponseBody Iterable<Task> getAllTasks(){
+    public @ResponseBody
+    Iterable<Task> getAllTasks() {
         return taskRepository.findAll();
     }
 
+
     @GetMapping(path = "/archived")
-    public @ResponseBody Iterable<Task> getArchived(){
-        return null;
+    public @ResponseBody
+    Iterable<Task> getArchived() {
+        return taskRepository.findByIsArchived(true);
     }
+
 
     @GetMapping(path = "/notarchived")
-    public @ResponseBody Iterable<Task> getNotArchived(){
-        return null;
+    public @ResponseBody
+    Iterable<Task> getNotArchived() {
+        return taskRepository.findByIsArchived(false);
     }
 
-    public String getDate(){
+    public String getDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss dd/MM/yyyy");
         Date date = new Date();
 
         return dateFormat.format(date);
     }
+
 }

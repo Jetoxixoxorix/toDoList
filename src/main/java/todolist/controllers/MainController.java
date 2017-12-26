@@ -9,14 +9,13 @@ import todolist.model.Task;
 import todolist.model.TaskRepository;
 
 
-import javax.servlet.http.HttpServlet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 @Controller
 @RequestMapping
-public class MainController extends HttpServlet {
+public class MainController {
 
     @Autowired
     private TaskRepository taskRepository;
@@ -31,9 +30,46 @@ public class MainController extends HttpServlet {
     @PostMapping("/task")
     public void taskSubmit(@ModelAttribute Task task, String description) {
         addNewTask(description);
-        //return "task";
     }
 
+    @GetMapping("/archive/{id}")
+    public String makeArchived(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("archive", taskRepository.findById(id));
+        return "all";
+    }
+
+    @PostMapping("/archive")
+    public String archiveSubmit(@ModelAttribute("archive") Task task) {
+        archivizing(task);
+        return "all";
+    }
+
+    public void archivizing(Task task){
+        task.setDescription(task.getDescription());
+        task.setArchived(true);
+        task.setUpdatedAt(getDate());
+        taskRepository.save(task);
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editTask(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("edit", taskRepository.findOne(id));
+        return "edit";
+    }
+
+    @PostMapping("/edit")
+    public String editTaskSubmit(@ModelAttribute("edit") Task task, String description) {
+        editTask(task, description);
+        return "edit";
+    }
+
+
+    public void editTask(Task task, String description){
+        task.setDescription(description);
+        task.setUpdatedAt(getDate());
+
+        taskRepository.save(task);
+    }
 
     @GetMapping(path = "/add")
     public @ResponseBody
@@ -43,6 +79,7 @@ public class MainController extends HttpServlet {
         task.setDescription(description);
         task.setCreatedAt(getDate());
         task.setArchived(false);
+
 
         taskRepository.save(task);
     }

@@ -11,14 +11,14 @@ public class Task {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private long id;
+    private Long id;
     private String description;
     private String createdAt;
     private String updatedAt;
     private String doneAt;
     private boolean isArchived;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

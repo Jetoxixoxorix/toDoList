@@ -1,12 +1,12 @@
-package todolist.Controllers;
+package todolist.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
-import todolist.Table.Task;
-import todolist.Table.TaskRepository;
+import todolist.model.Task;
+import todolist.model.TaskRepository;
 
 
 import javax.servlet.http.HttpServlet;
@@ -23,20 +23,21 @@ public class MainController extends HttpServlet {
 
 
     @GetMapping("/task")
-    public String tasks(Model model){
+    public String tasks(Model model) {
         model.addAttribute("task", new Task());
         return "task";
     }
 
     @PostMapping("/task")
-    public String taskSubmit(@ModelAttribute Task task,  String description) {
+    public void taskSubmit(@ModelAttribute Task task, String description) {
         addNewTask(description);
-        return "task";
+        //return "task";
     }
 
 
     @GetMapping(path = "/add")
-    public @ResponseBody String addNewTask(@RequestParam String description) {
+    public @ResponseBody
+    void addNewTask(@RequestParam String description) {
 
         Task task = new Task();
         task.setDescription(description);
@@ -44,28 +45,26 @@ public class MainController extends HttpServlet {
         task.setArchived(false);
 
         taskRepository.save(task);
-
-        return "Task saved";
     }
 
-    @GetMapping(path = "/all")
-    public @ResponseBody
-    Iterable<Task> getAllTasks() {
-        return taskRepository.findAll();
-    }
-
-
-    @GetMapping(path = "/archived")
-    public @ResponseBody
-    Iterable<Task> getArchived() {
-        return taskRepository.findByIsArchived(true);
+    @GetMapping("/all")
+    public String getAllTasks(Model model) {
+        model.addAttribute("all", taskRepository.findAll());
+        return "all";
     }
 
 
-    @GetMapping(path = "/notarchived")
-    public @ResponseBody
-    Iterable<Task> getNotArchived() {
-        return taskRepository.findByIsArchived(false);
+    @GetMapping("/archived")
+    public String getArchived(Model model) {
+        model.addAttribute("archived", taskRepository.findByIsArchived(true));
+        return "archived";
+    }
+
+
+    @GetMapping("/notarchived")
+    public String getNotArchived(Model model) {
+        model.addAttribute("notArchived", taskRepository.findByIsArchived(false));
+        return "notArchived";
     }
 
     public String getDate() {

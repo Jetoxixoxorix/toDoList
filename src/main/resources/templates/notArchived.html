@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All tasks</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h2>All tasks:</h2>
+<table border="1">
+    <tr>
+        <td>Task</td>
+        <td>Adding date</td>
+        <td>Last time updated</td>
+        <td>Done at</td>
+        <td>Archived</td>
+    </tr>
+
+    <tr th:each="task : ${notArchived}">
+        <td th:text="${task.description}"></td>
+        <td th:text="${task.createdAt}"></td>
+        <td th:text="${task.updatedAt}"></td>
+        <td th:text="${task.doneAt}"></td>
+        <td th:text="${task.archived}"></td>
+    </tr>
+
+</table>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-package todolist.Table;
+package todolist.model;
 
 import org.springframework.data.repository.CrudRepository;
 

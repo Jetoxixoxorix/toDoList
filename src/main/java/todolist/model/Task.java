@@ -1,4 +1,4 @@
-package todolist.Table;
+package todolist.model;
 
 
 import javax.persistence.Entity;
@@ -60,5 +60,10 @@ public class Task {
 
     public void setArchived(boolean isArchived) {
         this.isArchived = isArchived;
+    }
+
+    @Override
+    public String toString() {
+        return getDescription() + " " + getCreatedAt();
     }
 }

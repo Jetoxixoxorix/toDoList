@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>To do list</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">-->
 </head>
 <body>
-<div id = "content" class="container">
+<div id="content" class="container">
     <form action="#" th:action="@{/task}" th:object="${task}" method="post">
         <b>Write your task:</b>
 
@@ -14,10 +14,10 @@
         <button id="add" type="submit">Add</button>
     </form>
 </div>
-<div id = "tasks" class="container">
+<div id="tasks" class="container">
 
-        <b>Your task</b>
-        <p th:text="'description: ' + ${task.description}" />
+    <b>Your task</b>
+    <p th:text="'description: ' + ${task.description}"/>
 
 </div>
 </body>

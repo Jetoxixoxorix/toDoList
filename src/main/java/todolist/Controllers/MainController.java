@@ -2,29 +2,41 @@ package todolist.Controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import todolist.Table.Task;
 import todolist.Table.TaskRepository;
 
 
+import javax.servlet.http.HttpServlet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 @Controller
 @RequestMapping
-public class MainController {
+public class MainController extends HttpServlet {
 
     @Autowired
     private TaskRepository taskRepository;
 
+
+    @GetMapping("/task")
+    public String tasks(Model model){
+        model.addAttribute("task", new Task());
+        return "task";
+    }
+
+    @PostMapping("/task")
+    public String taskSubmit(@ModelAttribute Task task,  String description) {
+        addNewTask(description);
+        return "task";
+    }
+
+
     @GetMapping(path = "/add")
-    public @ResponseBody
-    String addNewTask(@RequestParam String description) {
+    public @ResponseBody String addNewTask(@RequestParam String description) {
 
         Task task = new Task();
         task.setDescription(description);

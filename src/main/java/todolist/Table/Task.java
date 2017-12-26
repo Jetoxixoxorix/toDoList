@@ -18,8 +18,6 @@ public class Task {
     private String doneAt;
     private boolean isArchived;
 
-
-
     public long getId() {
         return id;
     }

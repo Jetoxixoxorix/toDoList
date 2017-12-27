@@ -28,27 +28,8 @@ public class MainController {
     }
 
     @PostMapping("/task")
-    public void taskSubmit(@ModelAttribute Task task, String description) {
+    public void taskSubmit(@ModelAttribute("task") Task task, String description) {
         addNewTask(description);
-    }
-
-    @GetMapping("/archive/{id}")
-    public String makeArchived(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("archive", taskRepository.findById(id));
-        return "all";
-    }
-
-    @PostMapping("/archive")
-    public String archiveSubmit(@ModelAttribute("archive") Task task) {
-        archivizing(task);
-        return "all";
-    }
-
-    public void archivizing(Task task){
-        task.setDescription(task.getDescription());
-        task.setArchived(true);
-        task.setUpdatedAt(getDate());
-        taskRepository.save(task);
     }
 
     @GetMapping("/edit/{id}")
@@ -57,19 +38,15 @@ public class MainController {
         return "edit";
     }
 
-    @PostMapping("/edit")
-    public String editTaskSubmit(@ModelAttribute("edit") Task task, String description) {
-        editTask(task, description);
-        return "edit";
-    }
-
-
-    public void editTask(Task task, String description){
+    @PostMapping("/edit/{id}")
+    public String editTaskSubmit(String description, @PathVariable("id") Long id) {
+        Task task = taskRepository.findOne(id);
         task.setDescription(description);
         task.setUpdatedAt(getDate());
-
         taskRepository.save(task);
+        return "notarchived";
     }
+
 
     @GetMapping(path = "/add")
     public @ResponseBody

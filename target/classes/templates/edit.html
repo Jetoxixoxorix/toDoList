@@ -5,7 +5,7 @@
     <title>Editing</title>
 </head>
 <body>
-<form action="#" th:action="@{/edit.html}" th:object="${edit}" method="get">
+<form action="#" th:action="${edit.id}" th:object="${edit}" method="post">
     <table border="1">
     <tr>
         <td>Task</td>
@@ -13,6 +13,7 @@
         <td>Last time updated</td>
         <td>Done at</td>
         <td>Archived</td>
+        <td>ID</td>
     </tr>
     <tr>
 
@@ -21,16 +22,16 @@
         <td th:text="*{updatedAt}"></td>
         <td th:text="*{doneAt}"></td>
         <td th:text="*{archived}"></td>
+        <td th:text="*{id}"></td>
     </tr>
     </table>
 
 
     <h1>Task Description: </h1>
     <input type="text" th:field="*{description}"/>
-
-
     <button type="submit">Edit</button>
 </form>
+<button type="submit">Back to archived</button>
 
 </body>
 </html>

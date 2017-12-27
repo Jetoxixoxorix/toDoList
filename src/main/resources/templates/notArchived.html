@@ -21,6 +21,9 @@
         <td th:text="${task.updatedAt}"></td>
         <td th:text="${task.doneAt}"></td>
         <td th:text="${task.archived}"></td>
+        <form action="#" th:action="@{'edit/' + ${task.id}}" method="get">
+            <td><button>Edit</button></td>
+        </form>
     </tr>
 
 </table>

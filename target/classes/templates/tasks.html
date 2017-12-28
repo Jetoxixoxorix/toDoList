@@ -28,6 +28,10 @@
         <form action="#" th:action="@{'/archive/' + ${task.id}}" method="post">
             <td><button>Archive</button></td>
         </form>
+
+        <form action="#" th:action="@{'/done/' + ${task.id}}" method="post">
+            <td><button>Done</button></td>
+        </form>
     </tr>
 
 </table>

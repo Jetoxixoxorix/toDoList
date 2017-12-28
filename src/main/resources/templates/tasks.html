@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Not archived tasks</title>
+    <title>Tasks</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<h2>Not archived tasks</h2>
+<h2>Tasks:</h2>
 <table border="1">
     <tr>
         <td>Task</td>
@@ -15,14 +15,18 @@
         <td>Archived</td>
     </tr>
 
-    <tr th:each="task : ${notArchived}">
+    <tr th:each="task : ${tasks}">
         <td th:text="${task.description}"></td>
         <td th:text="${task.createdAt}"></td>
         <td th:text="${task.updatedAt}"></td>
         <td th:text="${task.doneAt}"></td>
         <td th:text="${task.archived}"></td>
-        <form action="#" th:action="@{'edit/' + ${task.id}}" method="get">
+        <form action="#" th:action="@{'/edit/' + ${task.id}}" method="get">
             <td><button>Edit</button></td>
+        </form>
+
+        <form action="#" th:action="@{'/archive/' + ${task.id}}" method="post">
+            <td><button>Archive</button></td>
         </form>
     </tr>
 

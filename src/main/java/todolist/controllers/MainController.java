@@ -11,6 +11,7 @@ import todolist.model.TaskRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 
 @Controller
@@ -39,12 +40,20 @@ public class MainController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editTaskSubmit(String description, @PathVariable("id") Long id) {
+    public String editTaskSubmit(String description, @PathVariable("id") Long id, Model model) {
         Task task = taskRepository.findOne(id);
         task.setDescription(description);
         task.setUpdatedAt(getDate());
         taskRepository.save(task);
-        return "notarchived";
+        return getNotArchived(model);
+    }
+
+    @PostMapping("/archive/{id}")
+    public String archiveTask(@PathVariable("id") Long id, Model model){
+        Task task = taskRepository.findOne(id);
+        task.setArchived(true);
+        taskRepository.save(task);
+        return getNotArchived(model);
     }
 
 
@@ -56,7 +65,6 @@ public class MainController {
         task.setDescription(description);
         task.setCreatedAt(getDate());
         task.setArchived(false);
-
 
         taskRepository.save(task);
     }
@@ -75,10 +83,10 @@ public class MainController {
     }
 
 
-    @GetMapping("/notarchived")
+    @GetMapping("/tasks")
     public String getNotArchived(Model model) {
-        model.addAttribute("notArchived", taskRepository.findByIsArchived(false));
-        return "notArchived";
+        model.addAttribute("tasks", taskRepository.findByIsArchived(false));
+        return "tasks";
     }
 
     public String getDate() {

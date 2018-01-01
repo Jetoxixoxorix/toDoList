@@ -3,38 +3,49 @@
 <head>
     <title>Tasks</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 </head>
 <body>
-<h2>Tasks:</h2>
-<table border="1">
-    <tr>
-        <td>Task</td>
-        <td>Adding date</td>
-        <td>Last time updated</td>
-        <td>Done at</td>
-        <td>Archived</td>
-    </tr>
+<div th:replace="header :: header"></div>
+<div id="content" class="container">
+    <h2>Tasks</h2>
+    <div id="table" class="container">
+        <table border="1">
+            <tr>
+                <td>Task</td>
+                <td>Adding date</td>
+                <td>Last time updated</td>
+                <td>Done at</td>
+                <td>Archived</td>
+            </tr>
 
-    <tr th:each="task : ${tasks}">
-        <td th:text="${task.description}"></td>
-        <td th:text="${task.createdAt}"></td>
-        <td th:text="${task.updatedAt}"></td>
-        <td th:text="${task.doneAt}"></td>
-        <td th:text="${task.archived}"></td>
-        <form action="#" th:action="@{'/edit/' + ${task.id}}" method="get">
-            <td><button>Edit</button></td>
-        </form>
+            <tr th:each="task : ${tasks}">
+                <td th:text="${task.description}"></td>
+                <td th:text="${task.createdAt}"></td>
+                <td th:text="${task.updatedAt}"></td>
+                <td th:text="${task.doneAt}"></td>
+                <td th:text="${task.archived}"></td>
+                <form action="#" th:action="@{'/edit/' + ${task.id}}" method="get">
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </form>
 
-        <form action="#" th:action="@{'/archive/' + ${task.id}}" method="post">
-            <td><button>Archive</button></td>
-        </form>
+                <form action="#" th:action="@{'/archive/' + ${task.id}}" method="post">
+                    <td>
+                        <button>Archive</button>
+                    </td>
+                </form>
 
-        <form action="#" th:action="@{'/done/' + ${task.id}}" method="post">
-            <td><button>Done</button></td>
-        </form>
-    </tr>
+                <form action="#" th:action="@{'/done/' + ${task.id}}" method="post">
+                    <td>
+                        <button>Done</button>
+                    </td>
+                </form>
+            </tr>
 
-</table>
-
+        </table>
+    </div>
+</div>
 </body>
 </html>

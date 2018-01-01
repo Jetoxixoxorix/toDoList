@@ -95,7 +95,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: com.vaadin.external.google:android-json:0.0.20131108.vaadin1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-core:4.3.13.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:4.3.13.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.webjars:bootstrap:4.0.0-beta.2" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars:bootstrap:4.0.0-beta.3" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:jquery:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.webjars.npm:popper.js:1.11.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-websocket:1.5.9.RELEASE" level="project" />

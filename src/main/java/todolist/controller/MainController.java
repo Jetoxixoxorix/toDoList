@@ -1,4 +1,4 @@
-package todolist.controllers;
+package todolist.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

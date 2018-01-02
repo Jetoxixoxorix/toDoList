@@ -5,16 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
+import todolist.TaskManager;
 import todolist.model.Task;
 import todolist.model.TaskRepository;
-
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Controller
 @RequestMapping
 public class MainController {
+
+    private TaskManager taskManager = new TaskManager();
 
     @Autowired
     private TaskRepository taskRepository;
@@ -26,8 +25,9 @@ public class MainController {
     }
 
     @PostMapping("/task")
-    public void taskSubmit(@ModelAttribute("task") Task task, String description) {
-        addNewTask(description);
+    public String taskSubmit(@ModelAttribute("task") Task task, String description) {
+        taskRepository.save(taskManager.addNewTask(description));
+        return "task";
     }
 
     @GetMapping("/edit/{id}")
@@ -39,8 +39,7 @@ public class MainController {
     @PostMapping("/edit/{id}")
     public String editTaskSubmit(String description, @PathVariable("id") Long id, Model model) {
         Task task = taskRepository.findOne(id);
-        task.setDescription(description);
-        task.setUpdatedAt(getDate());
+        taskManager.editTask(task, description);
         taskRepository.save(task);
         return getTasks(model);
     }
@@ -48,7 +47,7 @@ public class MainController {
     @PostMapping("/archive/{id}")
     public String archiveTask(@PathVariable("id") Long id, Model model) {
         Task task = taskRepository.findOne(id);
-        task.setArchived(true);
+        taskManager.archiveTask(task);
         taskRepository.save(task);
         return getTasks(model);
     }
@@ -56,33 +55,10 @@ public class MainController {
     @PostMapping("/done/{id}")
     public String makeDone(@PathVariable("id") Long id, Model model) {
         Task task = taskRepository.findOne(id);
-        if (task.getDoneAt() == null) {
-            task.setDoneAt(getDate());
-            taskRepository.save(task);
-        }
-
+        taskManager.makeDone(task);
+        taskRepository.save(task);
         return getTasks(model);
     }
-
-
-    @GetMapping(path = "/add")
-    public @ResponseBody
-    void addNewTask(@RequestParam String description) {
-
-        Task task = new Task();
-        task.setDescription(description);
-        task.setCreatedAt(getDate());
-        task.setArchived(false);
-
-        taskRepository.save(task);
-    }
-
-    @GetMapping("/all")
-    public String getAllTasks(Model model) {
-        model.addAttribute("all", taskRepository.findAll());
-        return "all";
-    }
-
 
     @GetMapping("/archived")
     public String getArchived(Model model) {
@@ -90,18 +66,9 @@ public class MainController {
         return "archived";
     }
 
-
     @GetMapping("/tasks")
     public String getTasks(Model model) {
         model.addAttribute("tasks", taskRepository.findByIsArchived(false));
         return "tasks";
     }
-
-    public String getDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss dd/MM/yyyy");
-        Date date = new Date();
-
-        return dateFormat.format(date);
-    }
-
 }

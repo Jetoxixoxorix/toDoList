@@ -1,7 +1,9 @@
 package todolist;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import todolist.controller.MainController;
@@ -12,6 +14,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TaskManager {
+
+    @Autowired
+    public TaskRepository taskRepository;
 
     public String getDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss dd/MM/yyyy");
@@ -24,11 +29,12 @@ public class TaskManager {
         return task;
     }
 
-    public Task addNewTask(String description) {
-        Task task = new Task();
+    public Task addNewTask(Task task, String description) {
+        //Task task = new Task();
         task.setDescription(description);
         task.setCreatedAt(getDate());
         task.setArchived(false);
+        taskRepository.save(task);
         return task;
     }
 

@@ -4,27 +4,98 @@
     <title>Tasks</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <style type="text/css">
+
+        .done {
+            background: green;
+        }
+
+    </style>
+
+    <script src="http://code.jquery.com/jquery-latest.min.js "></script>
+    <script type="text/javascript">  /*src="../js/ajax.js"*/
+
+    var http_request = false;
+
+    $(document).ready(function () {
+        $(".submit").click(function () {
+            var row = $(this).closest("tr");
+            var id = row.find(".id").html();
+
+            http_request = false;
+
+            //alert(id);
+
+            var url = '/done/' + id; //cells[5].innerText
+
+            if (window.XMLHttpRequest) {
+                http_request = new XMLHttpRequest();
+                if (http_request.overrideMimeType) {
+                    http_request.overrideMimeType('text/xml');
+                }
+            } else if (window.ActiveXObject) {
+                try {
+                    http_request = new ActiveXObject("Msxml2.XMLHTTP");
+                } catch (e) {
+                    try {
+                        http_request = new ActiveXObject("Microsoft.XMLHTTP");
+                    } catch (e) {
+                    }
+                }
+            }
+
+            if (!http_request) {
+                alert('Giving up :( Cannot create an XMLHTTP instance');
+                return false;
+            }
+
+            http_request.onreadystatechange = function () {
+                makeDone(http_request, row)
+            }
+            http_request.open('GET', url, true);
+            http_request.send(null);
+        });
+    });
+
+
+    function makeDone(http_request, row) {
+
+        if (http_request.readyState == 4) {
+            if (http_request.status == 200) {
+                row.toggleClass("done");
+                //document.getElementById('task').style.color = 'green';
+            } else {
+                alert('There was a problem with the request. ');
+            }
+        }
+
+    }
+
+
+    </script>
+
 </head>
 <body>
 <div th:replace="header :: header"></div>
 <div id="content" class="container">
     <h2>Tasks</h2>
-    <div id="table" class="container">
-        <table border="1">
+    <div class="container">
+        <table id="table" border="1">
             <tr>
-                <td>Task</td>
-                <td>Adding date</td>
-                <td>Last time updated</td>
-                <td>Done at</td>
-                <td>Archived</td>
+                <th>Task</th>
+                <th>Adding date</th>
+                <th>Last time updated</th>
+                <th>Done at</th>
+                <th>Archived</th>
             </tr>
 
-            <tr th:each="task : ${tasks}">
+            <tr th:id="task" th:each="task : ${tasks}">
                 <td th:text="${task.description}"></td>
                 <td th:text="${task.createdAt}"></td>
                 <td th:text="${task.updatedAt}"></td>
                 <td th:text="${task.doneAt}"></td>
                 <td th:text="${task.archived}"></td>
+                <td class="id" th:text="${task.id}"></td>
                 <form action="#" th:action="@{'/edit/' + ${task.id}}" method="get">
                     <td>
                         <button>Edit</button>
@@ -37,11 +108,15 @@
                     </td>
                 </form>
 
-                <form action="#" th:action="@{'/done/' + ${task.id}}" method="post">
-                    <td>
-                        <button>Done</button>
-                    </td>
-                </form>
+                <!--action="#" th:action="@{'/done/' + ${task.id}}" method="post"-->
+
+                <!--"makeRequest('tasks.html')"-->
+                <!--"document.getElementById('task').style.color = 'green'"-->
+
+                <td class="submit">
+                    <button>Done</button> <!--onclick="makeRequest(document.getElementById('id'))"-->
+                </td>
+                <!--<button type="button" onclick="makeRequest(document.getElementById('id').innerText)">Done</button>-->
             </tr>
 
         </table>

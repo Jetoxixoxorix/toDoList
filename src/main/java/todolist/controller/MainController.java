@@ -64,13 +64,15 @@ public class MainController {
     }
 
 
-    @PostMapping("/done/{id}")
+/*    @PostMapping("/done/{id}") //to przerobic czy inna metoda jeszcze?
     public String makeDone(@PathVariable("id") Long id, Model model) {
         Task task = taskRepository.findOne(id);
         taskManager.makeDone(task);
         taskRepository.save(task);
         return getTasks(model);
-    }
+    }*/
+
+
 
 /*
     @PostMapping("/done/{id}")
@@ -81,6 +83,22 @@ public class MainController {
         return getTasks(model);
     }
 */
+
+/*    @GetMapping("/done/{id}")
+    public String done(@PathVariable("id") Long id, Model model){
+        Task task = taskRepository.findOne(id);
+        taskManager.makeDone(task);
+        taskRepository.save(task);
+        return getTasks(model);
+    }*/
+
+    @GetMapping("/done/{id}")
+    public String done(@PathVariable("id") Long id, Model model) {
+        Task task = taskRepository.findOne(id);
+        taskManager.makeDone(task);
+        taskRepository.save(task);
+        return getTasks(model);
+    }
 
 
     @GetMapping("/archived")

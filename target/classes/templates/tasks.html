@@ -24,9 +24,7 @@
 
             http_request = false;
 
-            //alert(id);
-
-            var url = '/done/' + id; //cells[5].innerText
+            var url = '/done/' + id;
 
             if (window.XMLHttpRequest) {
                 http_request = new XMLHttpRequest();
@@ -63,15 +61,12 @@
         if (http_request.readyState == 4) {
             if (http_request.status == 200) {
                 row.toggleClass("done");
-                //document.getElementById('task').style.color = 'green';
             } else {
                 alert('There was a problem with the request. ');
             }
         }
 
     }
-
-
     </script>
 
 </head>
@@ -107,16 +102,9 @@
                         <button>Archive</button>
                     </td>
                 </form>
-
-                <!--action="#" th:action="@{'/done/' + ${task.id}}" method="post"-->
-
-                <!--"makeRequest('tasks.html')"-->
-                <!--"document.getElementById('task').style.color = 'green'"-->
-
                 <td class="submit">
-                    <button>Done</button> <!--onclick="makeRequest(document.getElementById('id'))"-->
+                    <button>Done</button>
                 </td>
-                <!--<button type="button" onclick="makeRequest(document.getElementById('id').innerText)">Done</button>-->
             </tr>
 
         </table>

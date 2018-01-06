@@ -1,19 +1,13 @@
 package todolist;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import todolist.controller.MainController;
 import todolist.model.Task;
 import todolist.model.TaskRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class TaskManager {
@@ -27,29 +21,46 @@ public class TaskManager {
         return dateFormat.format(date);
     }
 
-    public Task archiveTask(Task task){
-        task.setArchived(true);
-        return task;
-    }
-
     public Task addNewTask(String description) {
         Task task = new Task();
         task.setDescription(description);
         task.setCreatedAt(getDate());
         task.setArchived(false);
+        taskRepository.save(task);
         return task;
     }
 
-    public Task editTask(Task task, String description){
+    public Task editTask(String description, Long id){
+        Task task = taskRepository.findOne(id);
         task.setDescription(description);
         task.setUpdatedAt(getDate());
+        taskRepository.save(task);
         return task;
     }
 
-    public Task makeDone(Task task){
+    public Task makeDone(Long id){
+        Task task = taskRepository.findOne(id);
         if (task.getDoneAt() == null) {
             task.setDoneAt(getDate());
         }
+        taskRepository.save(task);
+        return task;
+    }
+
+    public Task archiveTask(Long id){
+        Task task = taskRepository.findOne(id);
+        task.setArchived(true);
+        taskRepository.save(task);
+        return task;
+    }
+
+    public List<Task> getArchived(boolean archived){
+        List<Task> tasks = taskRepository.findByIsArchived(archived);
+        return tasks;
+    }
+
+    public Task getById(Long id){
+        Task task = taskRepository.findOne(id);
         return task;
     }
 }

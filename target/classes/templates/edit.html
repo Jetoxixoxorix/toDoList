@@ -17,7 +17,6 @@
                     <td>Last time updated</td>
                     <td>Done at</td>
                     <td>Archived</td>
-                    <td>ID</td>
                 </tr>
                 <tr>
                     <td th:text="*{description}"></td>
@@ -25,7 +24,7 @@
                     <td th:text="*{updatedAt}"></td>
                     <td th:text="*{doneAt}"></td>
                     <td th:text="*{archived}"></td>
-                    <td th:text="*{id}"></td>
+                    <td hidden="hidden" th:text="*{id}"></td>
                 </tr>
             </table>
         </div>

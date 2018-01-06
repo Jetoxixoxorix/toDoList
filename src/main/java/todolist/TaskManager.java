@@ -15,11 +15,11 @@ import todolist.model.TaskRepository;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-//@Service
+@Service
 public class TaskManager {
 
- /*   @Autowired
-    public TaskRepository taskRepository;*/
+    @Autowired
+    public TaskRepository taskRepository;
 
     public String getDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss dd/MM/yyyy");

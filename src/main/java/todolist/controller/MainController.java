@@ -17,10 +17,10 @@ public class MainController {
 
     TaskManager taskManager = new TaskManager();
 
-/*    @Autowired
+    @Autowired
     public MainController(TaskManager taskManager){
 
-    }*/
+    }
 
     @Autowired
     private TaskRepository taskRepository;

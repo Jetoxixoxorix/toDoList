@@ -4,71 +4,9 @@
     <title>Tasks</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <style type="text/css">
-
-        .done {
-            background: green;
-        }
-
-    </style>
-
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <script src="http://code.jquery.com/jquery-latest.min.js "></script>
-    <script type="text/javascript">  /*src="../js/ajax.js"*/
-
-    var http_request = false;
-
-    $(document).ready(function () {
-        $(".submit").click(function () {
-            var row = $(this).closest("tr");
-            var id = row.find(".id").html();
-
-            http_request = false;
-
-            var url = '/done/' + id;
-
-            if (window.XMLHttpRequest) {
-                http_request = new XMLHttpRequest();
-                if (http_request.overrideMimeType) {
-                    http_request.overrideMimeType('text/xml');
-                }
-            } else if (window.ActiveXObject) {
-                try {
-                    http_request = new ActiveXObject("Msxml2.XMLHTTP");
-                } catch (e) {
-                    try {
-                        http_request = new ActiveXObject("Microsoft.XMLHTTP");
-                    } catch (e) {
-                    }
-                }
-            }
-
-            if (!http_request) {
-                alert('Giving up :( Cannot create an XMLHTTP instance');
-                return false;
-            }
-
-            http_request.onreadystatechange = function () {
-                makeDone(http_request, row)
-            }
-            http_request.open('GET', url, true);
-            http_request.send(null);
-        });
-    });
-
-
-    function makeDone(http_request, row) {
-
-        if (http_request.readyState == 4) {
-            if (http_request.status == 200) {
-                row.toggleClass("done");
-            } else {
-                alert('There was a problem with the request. ');
-            }
-        }
-
-    }
-    </script>
-
+    <script type="text/javascript" th:src="@{/js/ajax.js}"></script>
 </head>
 <body>
 <div th:replace="header :: header"></div>

@@ -21,44 +21,33 @@ public class TaskManager {
         return dateFormat.format(date);
     }
 
-    public Task addNewTask(String description) {
+    public void addNewTask(String description) {
         Task task = new Task();
         task.setDescription(description);
         task.setCreatedAt(getDate());
         task.setArchived(false);
         taskRepository.save(task);
-        return task;
     }
 
-    public Task editTask(String description, Long id){
+    public void editTask(String description, Long id){
         Task task = taskRepository.findOne(id);
         task.setDescription(description);
         task.setUpdatedAt(getDate());
         taskRepository.save(task);
-        return task;
     }
 
-    public Task makeDone(Long id){
+    public void makeDone(Long id){
         Task task = taskRepository.findOne(id);
         if (task.getDoneAt() == null) {
             task.setDoneAt(getDate());
         }
         taskRepository.save(task);
-        return task;
     }
 
-/*    public Task archiveTask(Long id){
+    public void archiveTask(Long id){
         Task task = taskRepository.findOne(id);
         task.setArchived(!task.isArchived());
         taskRepository.save(task);
-        return task;
-    }*/
-
-    public Task archiveTask(Long id){
-        Task task = taskRepository.findOne(id);
-        task.setArchived(!task.isArchived());
-        taskRepository.save(task);
-        return task;
     }
 
     public List<Task> getArchived(boolean archived){

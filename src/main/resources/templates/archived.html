@@ -16,7 +16,6 @@
                 <th>Adding date</th>
                 <th>Last time updated</th>
                 <th>Done at</th>
-                <th>Archived</th>
             </tr>
 
             <tr th:each="task : ${archived}">
@@ -24,7 +23,6 @@
                 <td th:text="${task.createdAt}"></td>
                 <td th:text="${task.updatedAt}"></td>
                 <td th:text="${task.doneAt}"></td>
-                <td th:text="${task.archived}"></td>
 
                 <form action="#" th:action="@{'/unarchive/' + ${task.id}}" method="get">
                     <td>

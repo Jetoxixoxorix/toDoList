@@ -25,8 +25,13 @@
                 <td th:text="${task.updatedAt}"></td>
                 <td th:text="${task.doneAt}"></td>
                 <td th:text="${task.archived}"></td>
-            </tr>
 
+                <form action="#" th:action="@{'/unarchive/' + ${task.id}}" method="get">
+                    <td>
+                        <button>Unarchive</button>
+                    </td>
+                </form>
+            </tr>
         </table>
     </div>
 </div>

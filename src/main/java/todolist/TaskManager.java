@@ -47,9 +47,16 @@ public class TaskManager {
         return task;
     }
 
+/*    public Task archiveTask(Long id){
+        Task task = taskRepository.findOne(id);
+        task.setArchived(!task.isArchived());
+        taskRepository.save(task);
+        return task;
+    }*/
+
     public Task archiveTask(Long id){
         Task task = taskRepository.findOne(id);
-        task.setArchived(true);
+        task.setArchived(!task.isArchived());
         taskRepository.save(task);
         return task;
     }

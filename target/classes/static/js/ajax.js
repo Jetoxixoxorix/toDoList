@@ -1,7 +1,7 @@
 var http_request = false;
 
 $(document).ready(function () {
-    $(".submit").click(function () {
+    $(".submit").on('click', function () {
         var row = $(this).closest("tr");
         var id = row.find(".id").html();
 
@@ -43,7 +43,7 @@ function makeDone(http_request, row) {
 
     if (http_request.readyState == 4) {
         if (http_request.status == 200) {
-            row.toggleClass("done");
+            row.addClass("done");
         } else {
             alert('There was a problem with the request. ');
         }

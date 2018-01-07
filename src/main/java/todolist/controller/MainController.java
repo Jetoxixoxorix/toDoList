@@ -43,10 +43,16 @@ public class MainController {
         return getTasks(model);
     }
 
-    @PostMapping("/archive/{id}")
+    @GetMapping("/archive/{id}")
     public String archiveTask(@PathVariable("id") Long id, Model model) {
         taskManager.archiveTask(id);
         return getTasks(model);
+    }
+
+    @GetMapping("/unarchive/{id}")
+    public String unarchiveTask(@PathVariable("id") Long id, Model model) {
+        taskManager.archiveTask(id);
+        return getArchived(model);
     }
 
     @GetMapping("/done/{id}")

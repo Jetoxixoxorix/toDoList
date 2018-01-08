@@ -26,7 +26,7 @@ $(document).ready(function () {
         }
 
         if (!httpRequest) {
-            alert('Giving up :( Cannot create an XMLHTTP instance');
+            alert('Cannot create an XMLHTTP instance');
             return false;
         }
 

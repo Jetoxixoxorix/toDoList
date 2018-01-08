@@ -51,12 +51,10 @@ public class TaskManager {
     }
 
     public List<Task> getArchived(boolean archived){
-        List<Task> tasks = taskRepository.findByIsArchived(archived);
-        return tasks;
+        return taskRepository.findByIsArchived(archived);
     }
 
     public Task getById(Long id){
-        Task task = taskRepository.findOne(id);
-        return task;
+        return taskRepository.findOne(id);
     }
 }

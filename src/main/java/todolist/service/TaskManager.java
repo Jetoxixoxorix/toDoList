@@ -1,9 +1,9 @@
-package todolist;
+package todolist.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import todolist.model.Task;
-import todolist.model.TaskRepository;
+import todolist.repository.TaskRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

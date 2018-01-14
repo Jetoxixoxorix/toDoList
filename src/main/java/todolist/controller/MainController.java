@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
-import todolist.TaskManager;
+import todolist.service.TaskManager;
 import todolist.model.Task;
 
 @Controller
@@ -19,7 +19,7 @@ public class MainController {
         this.taskManager = taskManager;
     }
 
-    @GetMapping("/task")
+    @GetMapping({"/task", "/"})
     public String tasks(Model model) {
         model.addAttribute("task", new Task());
         return "task";

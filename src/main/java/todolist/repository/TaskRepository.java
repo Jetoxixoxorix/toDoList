@@ -1,7 +1,8 @@
-package todolist.model;
+package todolist.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import todolist.model.Task;
 
 import java.util.List;
 

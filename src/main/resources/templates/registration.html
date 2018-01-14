@@ -13,13 +13,25 @@
 <div th:replace="header :: header"></div>
 <div id="content" class="container">
     <h2>Create your account</h2>
-
     <form action="#" th:action="@{/registration}" th:object="${userData}" method="post">
-        <input type="text" th:field="*{login}" placeholder="user name"/>
-        <input type="password" th:field="*{password}" placeholder="password"/>
-        <button id="register" type="submit">Register</button>
+        <table>
+            <tr>
+                <td>User name:</td>
+                <td><input type="text" th:field="*{login}"/></td>
+                <td th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Login Error</td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type="password" th:field="*{password}"/></td>
+                <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="register" type="submit">Register</button>
+                </td>
+            </tr>
+        </table>
     </form>
-
 </div>
 </body>
 </html>

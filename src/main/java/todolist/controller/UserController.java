@@ -4,12 +4,15 @@ package todolist.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import todolist.model.User;
 import todolist.repository.UserRepository;
+
+import javax.validation.Valid;
 
 @Controller
 public class UserController {
@@ -24,9 +27,12 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute("userData") User user){
+    public String registration(@Valid @ModelAttribute("userData") User user, BindingResult bindingResult){
+        if(bindingResult.hasErrors())
+            return "registration";
+
         userRepository.save(user);
-        return "registration";
+        return "completed";
     }
 
     @GetMapping("/login")

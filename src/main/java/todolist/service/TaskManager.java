@@ -3,6 +3,7 @@ package todolist.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import todolist.model.Task;
+import todolist.model.User;
 import todolist.repository.TaskRepository;
 
 import java.text.SimpleDateFormat;
@@ -21,11 +22,12 @@ public class TaskManager {
         return dateFormat.format(date);
     }
 
-    public void addNewTask(String description) {
+    public void addNewTask(String description, User user) {
         Task task = new Task();
         task.setDescription(description);
         task.setCreatedAt(getDate());
         task.setArchived(false);
+        task.setUser_id(user.getUser_id());
         taskRepository.save(task);
     }
 

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
+import todolist.model.User;
 import todolist.service.TaskManager;
 import todolist.model.Task;
 
@@ -13,10 +14,12 @@ import todolist.model.Task;
 public class MainController {
 
     TaskManager taskManager;
+    UserController userController;
 
     @Autowired
-    public MainController(TaskManager taskManager){
+    public MainController(TaskManager taskManager, UserController userController){
         this.taskManager = taskManager;
+        this.userController = userController;
     }
 
     @GetMapping({"/task", "/"})
@@ -26,8 +29,8 @@ public class MainController {
     }
 
     @PostMapping("/task")
-    public String taskSubmit(@ModelAttribute("task") Task task, String description) {
-        taskManager.addNewTask(description);
+    public String taskSubmit(@ModelAttribute("task") Task task, String description, @ModelAttribute("userDataLogin") User user) {
+        taskManager.addNewTask(description, user);
         return "task";
     }
 

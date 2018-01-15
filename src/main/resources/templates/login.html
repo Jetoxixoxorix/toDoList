@@ -13,13 +13,23 @@
 <div th:replace="header :: header"></div>
 <div id="content" class="container">
     <h2>Login</h2>
-
     <form action="#" th:action="@{/login}" th:object="${userDataLogin}" method="post">
-        <input type="text" th:field="*{login}" placeholder="user name"/>
-        <input type="password" th:field="*{password}" placeholder="password"/>
-        <button id="login" type="submit">Sign in</button>
+        <table>
+            <tr>
+                <td>User name:</td>
+                <td><input type="text" th:field="*{username}"/></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type="password" th:field="*{password}"/></td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="signin" type="submit">Sign in</button>
+                </td>
+            </tr>
+        </table>
     </form>
-
 </div>
 </body>
 </html>

@@ -42,9 +42,15 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute("userDataLogin") User user, String username, String password){
-        //user.setLogin(username);
-        //user.setPassword(password);
+    public String login(@ModelAttribute("userDataLogin") User user){
+        String username = user.getUsername();
+        String password = user.getPassword();
+
+        if(userRepository.findUserByUsername(username) != null){
+            if(userRepository.findUserByUsername(username).getPassword().equals(password)){
+                return "logincompleted";
+            }
+        }
         return "login";
     }
 

@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface TaskRepository extends CrudRepository<Task, Long> {
-    List<Task> findByIsArchived(boolean isArchived);
+    List<Task> findByIsArchivedAndUserId(boolean isArchived, Long userId);
 }

@@ -53,8 +53,8 @@ public class TaskManager {
         taskRepository.save(task);
     }
 
-    public List<Task> getArchived(boolean archived){
-        return taskRepository.findByIsArchived(archived);
+    public List<Task> getArchived(boolean archived, Long userId){
+        return taskRepository.findByIsArchivedAndUserId(archived, userId);
     }
 
     public Task getById(Long id){

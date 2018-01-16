@@ -66,11 +66,4 @@ public class UserController {
     public @ResponseBody Iterable<User> getAllUsers() {
             return userRepository.findAll();
     }
-
-
-    @GetMapping("/all")
-    public String getUsers(Model model) {
-        model.addAttribute("all", userRepository.findAll());
-        return "all";
-    }
 }

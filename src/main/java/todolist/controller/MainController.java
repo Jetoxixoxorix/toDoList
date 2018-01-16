@@ -68,13 +68,17 @@ public class MainController {
 
     @GetMapping("/archived")
     public String getArchived(Model model) {
-        model.addAttribute("archived", taskManager.getArchived(true));
+        User user = UserController.user;
+        Long userId =  userController.userRepository.findUserByUsername(user.getUsername()).getUserId();
+        model.addAttribute("archived", taskManager.getArchived(true, userId));
         return "archived";
     }
 
     @GetMapping("/tasks")
     public String getTasks(Model model) {
-        model.addAttribute("tasks", taskManager.getArchived(false));
+        User user = UserController.user;
+        Long userId =  userController.userRepository.findUserByUsername(user.getUsername()).getUserId();
+        model.addAttribute("tasks", taskManager.getArchived(false, userId));
         return "tasks";
     }
 

@@ -6,12 +6,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
+@Table(name = "user")
 public class User {
-
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long user_id;
+    @Column(name = "user_id")
+    private Long id;
 
     @Column(unique = true)
     @NotNull
@@ -23,8 +24,8 @@ public class User {
     private String password;
 
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return id;
     }
 
     public String getUsername() {
@@ -44,4 +45,8 @@ public class User {
     }
 
 
+    @Override
+    public String toString() {
+        return getUserId() + getUsername() + getPassword();
+    }
 }

@@ -18,8 +18,8 @@ public class MainController {
 
     @Autowired
     public MainController(TaskManager taskManager, UserController userController){
-        this.taskManager = taskManager;
         this.userController = userController;
+        this.taskManager = taskManager;
     }
 
     @GetMapping({"/task", "/"})
@@ -29,8 +29,10 @@ public class MainController {
     }
 
     @PostMapping("/task")
-    public String taskSubmit(@ModelAttribute("task") Task task, String description, @ModelAttribute("userDataLogin") User user) {
-        taskManager.addNewTask(description, user);
+    public String taskSubmit(@ModelAttribute("task") Task task, String description) {
+        User user = UserController.user;
+        Long userId =  userController.userRepository.findUserByUsername(user.getUsername()).getUserId();
+        taskManager.addNewTask(description, userId);
         return "task";
     }
 
@@ -75,4 +77,10 @@ public class MainController {
         model.addAttribute("tasks", taskManager.getArchived(false));
         return "tasks";
     }
+
+    @GetMapping("/a")
+    public @ResponseBody Iterable<Task> getAllTasks() {
+        return taskManager.taskRepository.findAll();
+    }
+
 }

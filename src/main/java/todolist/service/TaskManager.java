@@ -17,17 +17,18 @@ public class TaskManager {
     public TaskRepository taskRepository;
 
     public String getDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         Date date = new Date();
         return dateFormat.format(date);
     }
 
-    public void addNewTask(String description, User user) {
+    public void addNewTask(String description, Long userId) {
         Task task = new Task();
         task.setDescription(description);
         task.setCreatedAt(getDate());
         task.setArchived(false);
-        task.setUser_id(user.getUser_id());
+        /*task.setUser(user);*/
+        task.setUserId(userId);
         taskRepository.save(task);
     }
 

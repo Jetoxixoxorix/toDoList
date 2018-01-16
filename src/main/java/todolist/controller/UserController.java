@@ -3,22 +3,24 @@ package todolist.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import todolist.model.User;
 import todolist.repository.UserRepository;
 
 import javax.validation.Valid;
 
 @Controller
+@RequestMapping
+@Service
 public class UserController {
 
+    static User user;
+
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     @GetMapping("/registration")
     public String registration(Model model){
@@ -48,14 +50,27 @@ public class UserController {
 
         if(userRepository.findUserByUsername(username) != null){
             if(userRepository.findUserByUsername(username).getPassword().equals(password)){
+                this.user = user;
                 return "logincompleted";
             }
         }
         return "login";
     }
 
+    @GetMapping("/eloszka")
+    public String eloszka(@ModelAttribute("userDataLogin") User user){
+        return this.user.toString() + userRepository.findUserByUsername(this.user.getUsername()).getUserId();
+    }
+
     @GetMapping("/users")
     public @ResponseBody Iterable<User> getAllUsers() {
             return userRepository.findAll();
+    }
+
+
+    @GetMapping("/all")
+    public String getUsers(Model model) {
+        model.addAttribute("all", userRepository.findAll());
+        return "all";
     }
 }

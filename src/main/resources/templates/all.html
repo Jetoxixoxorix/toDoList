@@ -12,7 +12,23 @@
 <body>
 <div th:replace="header :: header"></div>
 <div id="content" class="container">
-    <h2>You are logged <span th:text="${userDataLogin.username} + ${userDataLogin.userId} + ${userDataLogin.password}"></span>.</h2>
+    <h2>Users</h2>
+    <div class="container">
+        <table id="table" border="1">
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Password</th>
+            </tr>
+
+            <tr th:each="user : ${all}">
+                <td th:text="${user.userId}"></td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.password}"></td>
+            </tr>
+
+        </table>
+    </div>
 </div>
 </body>
 </html>

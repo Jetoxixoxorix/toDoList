@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import todolist.model.User;
 import todolist.service.TaskManager;
 import todolist.model.Task;
+import todolist.service.UserManager;
 
 @Controller
 @RequestMapping
@@ -15,11 +16,13 @@ public class MainController {
 
     TaskManager taskManager;
     UserController userController;
+    UserManager userManager;
 
     @Autowired
-    public MainController(TaskManager taskManager, UserController userController){
+    public MainController(TaskManager taskManager, UserController userController, UserManager userManager){
         this.userController = userController;
         this.taskManager = taskManager;
+        this.userManager = userManager;
     }
 
     @GetMapping({"/task", "/"})
@@ -30,9 +33,7 @@ public class MainController {
 
     @PostMapping("/task")
     public String taskSubmit(@ModelAttribute("task") Task task, String description) {
-        User user = UserController.user;
-        Long userId =  userController.userRepository.findUserByUsername(user.getUsername()).getUserId();
-        taskManager.addNewTask(description, userId);
+        taskManager.addNewTask(description, userManager.getUserId());
         return "task";
     }
 
@@ -68,17 +69,13 @@ public class MainController {
 
     @GetMapping("/archived")
     public String getArchived(Model model) {
-        User user = UserController.user;
-        Long userId =  userController.userRepository.findUserByUsername(user.getUsername()).getUserId();
-        model.addAttribute("archived", taskManager.getArchived(true, userId));
+        model.addAttribute("archived", taskManager.getArchived(true,userManager.getUserId()));
         return "archived";
     }
 
     @GetMapping("/tasks")
     public String getTasks(Model model) {
-        User user = UserController.user;
-        Long userId =  userController.userRepository.findUserByUsername(user.getUsername()).getUserId();
-        model.addAttribute("tasks", taskManager.getArchived(false, userId));
+        model.addAttribute("tasks", taskManager.getArchived(false, userManager.getUserId()));
         return "tasks";
     }
 

@@ -20,7 +20,6 @@
                 <th>Adding date</th>
                 <th>Last time updated</th>
                 <th>Done at</th>
-                <th>User_id</th>
             </tr>
 
             <tr th:id="task" th:each="task : ${tasks}">
@@ -28,7 +27,6 @@
                 <td th:text="${task.createdAt}"></td>
                 <td th:text="${task.updatedAt}"></td>
                 <td th:text="${task.doneAt}"></td>
-                <td th:text="${task.userId}"></td>
 
                 <td hidden="hidden" class="id" th:text="${task.id}"></td>
                 <form action="#" th:action="@{'/edit/' + ${task.id}}" method="get">

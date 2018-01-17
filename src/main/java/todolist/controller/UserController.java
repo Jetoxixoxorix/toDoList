@@ -9,18 +9,20 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import todolist.model.User;
 import todolist.repository.UserRepository;
+import todolist.service.UserManager;
 
 import javax.validation.Valid;
 
 @Controller
 @RequestMapping
-@Service
 public class UserController {
 
-    static User user;
+    UserManager userManager;
 
     @Autowired
-    UserRepository userRepository;
+    public UserController(UserManager userManager){
+        this.userManager = userManager;
+    }
 
     @GetMapping("/registration")
     public String registration(Model model){
@@ -33,7 +35,7 @@ public class UserController {
         if(bindingResult.hasErrors())
             return "registration";
 
-        userRepository.save(user);
+        userManager.userRegistration(user);
         return "completed";
     }
 
@@ -45,25 +47,11 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(@ModelAttribute("userDataLogin") User user){
-        String username = user.getUsername();
-        String password = user.getPassword();
-
-        if(userRepository.findUserByUsername(username) != null){
-            if(userRepository.findUserByUsername(username).getPassword().equals(password)){
-                this.user = user;
-                return "logincompleted";
-            }
-        }
-        return "login";
+        return userManager.loginValidation(user);
     }
 
-    @GetMapping("/eloszka")
-    public String eloszka(@ModelAttribute("userDataLogin") User user){
-        return this.user.toString() + userRepository.findUserByUsername(this.user.getUsername()).getUserId();
-    }
-
-    @GetMapping("/users")
+/*    @GetMapping("/users")
     public @ResponseBody Iterable<User> getAllUsers() {
             return userRepository.findAll();
-    }
+    }*/
 }

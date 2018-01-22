@@ -3,12 +3,10 @@ package todolist.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import todolist.model.User;
-import todolist.repository.UserRepository;
 import todolist.service.UserManager;
 
 import javax.validation.Valid;
@@ -49,9 +47,4 @@ public class UserController {
     public String login(@ModelAttribute("userDataLogin") User user){
         return userManager.loginValidation(user);
     }
-
-/*    @GetMapping("/users")
-    public @ResponseBody Iterable<User> getAllUsers() {
-            return userRepository.findAll();
-    }*/
 }

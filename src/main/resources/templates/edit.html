@@ -9,8 +9,8 @@
 <div th:replace="header :: header"></div>
 <div id="content" class="container">
     <form action="#" th:action="${edit.id}" th:object="${edit}" method="post">
-        <div id="table" class="container">
-            <table border="1">
+        <div class="container">
+            <table class="table">
                 <tr>
                     <td>Task</td>
                     <td>Adding date</td>
@@ -28,13 +28,19 @@
         </div>
         <div id="editing" class="container">
             <h1>Task description </h1>
-            <input type="text" th:field="*{description}"/>
-            <button type="submit">Edit</button>
+            <div class="row">
+                <div class="col-md-4">
+                    <input class="form-control" type="text" th:field="*{description}"/>
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-default">Edit</button>
+                </div>
+            </div>
         </div>
     </form>
     <div id="cancelling" class="container">
         <form action="#" th:action="@{/tasks}" method="get">
-            <button type="submit">Cancel</button>
+            <button type="submit" class="btn btn-default">Cancel</button>
         </form>
     </div>
 </div>

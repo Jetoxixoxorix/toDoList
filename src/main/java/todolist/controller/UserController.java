@@ -18,19 +18,19 @@ public class UserController {
     UserManager userManager;
 
     @Autowired
-    public UserController(UserManager userManager){
+    public UserController(UserManager userManager) {
         this.userManager = userManager;
     }
 
     @GetMapping("/registration")
-    public String registration(Model model){
+    public String registration(Model model) {
         model.addAttribute("userData", new User());
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String registration(@Valid @ModelAttribute("userData") User user, BindingResult bindingResult){
-        if(bindingResult.hasErrors())
+    public String registration(@Valid @ModelAttribute("userData") User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
             return "registration";
 
         userManager.userRegistration(user);
@@ -38,13 +38,19 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login(Model model){
+    public String login(Model model) {
         model.addAttribute("userDataLogin", new User());
         return "login";
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute("userDataLogin") User user){
+    public String login(@ModelAttribute("userDataLogin") User user) {
         return userManager.loginValidation(user);
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        userManager.logout();
+        return "logout";
     }
 }

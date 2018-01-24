@@ -4,7 +4,7 @@
     <title>Tasks</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" th:href="@{/external/bootstrap/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
     <script type="text/javascript" th:src="@{/external/bootstrap/js/bootstrap.min.js}"></script>
     <script type="text/javascript" th:src="@{/external/jquery/jquery-3.2.1.js}"></script>
     <script type="text/javascript" th:src="@{/js/ajax.js}"></script>
@@ -17,15 +17,15 @@
         <table>
             <tr>
                 <td>User name:</td>
-                <td><input type="text" th:field="*{username}"/></td>
+                <td><input class="form-control" type="text" th:field="*{username}"/></td>
             </tr>
             <tr>
                 <td>Password:</td>
-                <td><input type="password" th:field="*{password}"/></td>
+                <td><input class="form-control" type="password" th:field="*{password}"/></td>
             </tr>
             <tr>
                 <td>
-                    <button id="signin" type="submit">Sign in</button>
+                    <button class="btn btn-default" id="signin" type="submit">Sign in</button>
                 </td>
             </tr>
         </table>

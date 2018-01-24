@@ -33,4 +33,8 @@ public class UserManager {
     public Long getUserId(){
         return userRepository.findUserByUsername(user.getUsername()).getUserId();
     }
+
+    public void logout(){
+        user = null;
+    }
 }

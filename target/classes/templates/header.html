@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<!--<head>
     <link rel="stylesheet" th:href="@{/external/bootstrap/css/bootstrap.min.css}"/>
+</head>-->
+<head th:replace="head :: head">
 </head>
 <body>
 <div class="navbar navbar-inverse" th:fragment="header">

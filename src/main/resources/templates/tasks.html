@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="head :: head">
+<head th:replace="header :: head">
 </head>
 <body>
 <div th:replace="header :: header"></div>
@@ -21,7 +21,7 @@
                 <td th:text="${task.updatedAt}"></td>
                 <td th:text="${task.doneAt}"></td>
                 <td hidden="hidden" class="id" th:text="${task.id}"></td>
-                
+
                 <form action="#" th:action="@{'/edit/' + ${task.id}}" method="get">
                     <td>
                         <button class="btn btn-default">Edit</button>

@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<!--<head>
-    <link rel="stylesheet" th:href="@{/external/bootstrap/css/bootstrap.min.css}"/>
+<!--<head th:replace="head :: head">
 </head>-->
-<head th:replace="head :: head">
+<head th:fragment="head">
+    <title>To do list</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" th:href="@{/external/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <script type="text/javascript" th:src="@{/external/bootstrap/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/external/jquery/jquery-3.2.1.js}"></script>
+    <script type="text/javascript" th:src="@{/js/ajax.js}"></script>
 </head>
 <body>
 <div class="navbar navbar-inverse" th:fragment="header">
@@ -22,10 +28,10 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#" th:href="@{/registration}" >Register</a>
+                    <a href="#" th:href="@{/registration}">Register</a>
                 </li>
                 <li>
-                    <a href="#" th:href="@{/login}" >Sign in</a>
+                    <a href="#" th:href="@{/login}">Sign in</a>
                 </li>
                 <li>
                     <a href="#" th:href="@{/logout}">Logout</a>

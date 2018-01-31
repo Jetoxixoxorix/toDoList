@@ -15,12 +15,10 @@ import todolist.service.UserManager;
 public class MainController {
 
     TaskManager taskManager;
-    UserController userController;
     UserManager userManager;
 
     @Autowired
-    public MainController(TaskManager taskManager, UserController userController, UserManager userManager){
-        this.userController = userController;
+    public MainController(TaskManager taskManager, UserManager userManager){
         this.taskManager = taskManager;
         this.userManager = userManager;
     }

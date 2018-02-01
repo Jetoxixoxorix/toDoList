@@ -18,30 +18,6 @@ public class Task {
     private String doneAt;
     private boolean isArchived;
 
-/*    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user){
-        this.user = user;
-    }*/
-
-/*    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "user_id")*/
-/*    private Long user;
-
-    public Long getUser() {
-        return user;
-    }
-
-    public void setUser(Long user){
-        this.user = user;
-    }*/
-
     private Long userId;
 
     public Long getUserId() {

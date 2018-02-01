@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import todolist.model.User;
+import todolist.service.ITaskManager;
+import todolist.service.IUserManager;
 import todolist.service.TaskManager;
 import todolist.model.Task;
 import todolist.service.UserManager;
@@ -14,11 +16,11 @@ import todolist.service.UserManager;
 @RequestMapping
 public class MainController {
 
-    TaskManager taskManager;
-    UserManager userManager;
+    ITaskManager taskManager;
+    IUserManager userManager;
 
     @Autowired
-    public MainController(TaskManager taskManager, UserManager userManager){
+    public MainController(ITaskManager taskManager, IUserManager userManager){
         this.taskManager = taskManager;
         this.userManager = userManager;
     }

@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class TaskManager {
+public class TaskManager implements ITaskManager {
 
     @Autowired
     public TaskRepository taskRepository;
@@ -27,7 +27,6 @@ public class TaskManager {
         task.setDescription(description);
         task.setCreatedAt(getDate());
         task.setArchived(false);
-        /*task.setUser(user);*/
         task.setUserId(userId);
         taskRepository.save(task);
     }

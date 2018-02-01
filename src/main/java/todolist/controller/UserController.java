@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import todolist.model.User;
-import todolist.service.UserManager;
+import todolist.service.IUserManager;
 
 import javax.validation.Valid;
 
@@ -15,10 +15,10 @@ import javax.validation.Valid;
 @RequestMapping
 public class UserController {
 
-    UserManager userManager;
+    IUserManager userManager;
 
     @Autowired
-    public UserController(UserManager userManager) {
+    public UserController(IUserManager userManager) {
         this.userManager = userManager;
     }
 

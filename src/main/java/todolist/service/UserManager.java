@@ -6,7 +6,7 @@ import todolist.model.User;
 import todolist.repository.UserRepository;
 
 @Service
-public class UserManager {
+public class UserManager implements IUserManager {
 
     public static User user;
 

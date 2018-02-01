@@ -1,14 +1,11 @@
 package todolist.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
-import todolist.model.User;
 import todolist.service.ITaskManager;
 import todolist.service.IUserManager;
-import todolist.service.TaskManager;
 import todolist.model.Task;
 import todolist.service.UserManager;
 

@@ -17,17 +17,12 @@ public class UserManager implements IUserManager {
         userRepository.save(user);
     }
 
-    public String loginValidation(User user){
-        String username = user.getUsername();
-        String password = user.getPassword();
+    public User findUser(String username) {
+        return userRepository.findUserByUsername(username);
+    }
 
-        if(userRepository.findUserByUsername(username) != null){
-            if(userRepository.findUserByUsername(username).getPassword().equals(password)){
-                this.user = user;
-                return "logincompleted";
-            }
-        }
-        return "login";
+    public String findPassword(String username){
+        return userRepository.findUserByUsername(username).getPassword();
     }
 
     public Long getUserId(){

@@ -1,11 +1,12 @@
 package todolist.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import todolist.UserValidator;
+import todolist.WrongPasswordException;
 import todolist.model.User;
 import todolist.service.IUserManager;
 
@@ -16,10 +17,12 @@ import javax.validation.Valid;
 public class UserController {
 
     IUserManager userManager;
+    UserValidator userValidator;
 
     @Autowired
-    public UserController(IUserManager userManager) {
+    public UserController(IUserManager userManager, UserValidator userValidator) {
         this.userManager = userManager;
+        this.userValidator = userValidator;
     }
 
     @GetMapping("/registration")
@@ -45,7 +48,15 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(@ModelAttribute("userDataLogin") User user) {
-        return userManager.loginValidation(user);
+        try {
+            userValidator.userValidation(user);
+        } catch (NullPointerException e) {
+            return "login";
+        } catch (WrongPasswordException e){
+            return "login";
+        }
+
+        return "logincompleted";
     }
 
     @GetMapping("/logout")

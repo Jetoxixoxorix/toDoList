@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import todolist.UserValidator;
+import todolist.IUserValidator;
 import todolist.WrongPasswordException;
 import todolist.model.User;
 import todolist.service.IUserManager;
@@ -17,10 +17,10 @@ import javax.validation.Valid;
 public class UserController {
 
     IUserManager userManager;
-    UserValidator userValidator;
+    IUserValidator userValidator;
 
     @Autowired
-    public UserController(IUserManager userManager, UserValidator userValidator) {
+    public UserController(IUserManager userManager, IUserValidator userValidator) {
         this.userManager = userManager;
         this.userValidator = userValidator;
     }

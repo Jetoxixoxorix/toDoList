@@ -3,15 +3,16 @@ package todolist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import todolist.model.User;
+import todolist.service.IUserManager;
 import todolist.service.UserManager;
 
 @Service
-public class UserValidator {
+public class UserValidator implements IUserValidator {
 
-    UserManager userManager;
+    IUserManager userManager;
 
     @Autowired
-    public UserValidator(UserManager userManager) {
+    public UserValidator(IUserManager userManager) {
         this.userManager = userManager;
     }
 
@@ -26,7 +27,7 @@ public class UserValidator {
             if (!userManager.findPassword(username).equals(password))
                 throw new WrongPasswordException();
 
-            userManager.user = user;
+            UserManager.user = user;
         }
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import todolist.model.User;
 import todolist.repository.UserRepository;
 
+
 @Service
 public class UserManager implements IUserManager {
 
@@ -22,11 +23,11 @@ public class UserManager implements IUserManager {
     }
 
     public String findPassword(String username){
-        return userRepository.findUserByUsername(username).getPassword();
+        return findUser(username).getPassword();
     }
 
     public Long getUserId(){
-        return userRepository.findUserByUsername(user.getUsername()).getUserId();
+        return findUser(user.getUsername()).getUserId();
     }
 
     public void logout(){

@@ -48,4 +48,5 @@ public class User {
     public String toString() {
         return getUserId() + getUsername() + getPassword();
     }
+
 }

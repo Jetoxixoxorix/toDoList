@@ -32,7 +32,9 @@
                     <a href="#" th:href="@{/login}">Sign in</a>
                 </li>
                 <li>
-                    <a href="#" th:href="@{/logout}">Logout</a>
+                    <form th:action="@{/logout}" method="post" id="logout">
+                    </form>
+                    <a href="#" onclick="document.getElementById('logout').submit()">Logout</a>
                 </li>
             </ul>
         </div>

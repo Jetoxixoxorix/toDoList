@@ -30,8 +30,8 @@ public class MainController {
 
     @PostMapping("/task")
     public String taskSubmit(@ModelAttribute("task") Task task, String description) {
-        if(UserManager.user == null)
-            return "mustlogin";
+ /*       if(UserManager.user == null)
+            return "mustlogin";*/
         taskManager.addNewTask(description, userManager.getUserId());
         return "task";
     }
@@ -68,16 +68,16 @@ public class MainController {
 
     @GetMapping("/archived")
     public String getArchived(Model model) {
-        if(UserManager.user == null)
-            return "mustlogin";
+/*        if(UserManager.user == null)
+            return "mustlogin";*/
         model.addAttribute("archived", taskManager.getArchived(true,userManager.getUserId()));
         return "archived";
     }
 
     @GetMapping("/tasks")
     public String getTasks(Model model) {
-        if(UserManager.user == null)
-            return "mustlogin";
+/*        if(UserManager.user == null)
+            return "mustlogin";*/
         model.addAttribute("tasks", taskManager.getArchived(false, userManager.getUserId()));
         return "tasks";
     }

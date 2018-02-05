@@ -6,15 +6,15 @@
 <div th:replace="header :: header"></div>
 <div id="content" class="container">
     <h2>Login</h2>
-    <form action="#" th:action="@{/login}" th:object="${userDataLogin}" method="post">
+    <form th:action="@{/login}" th:object="${userDataLogin}" method="post">
         <table>
             <tr>
                 <td>User name:</td>
-                <td><input class="form-control" type="text" th:field="*{username}"/></td>
+                <td><input class="form-control" type="text" th:field="*{username}" /></td>
             </tr>
             <tr>
                 <td>Password:</td>
-                <td><input class="form-control" type="password" th:field="*{password}"/></td>
+                <td><input class="form-control" type="password" th:field="*{password}" /></td>
             </tr>
             <tr>
                 <td>
@@ -23,6 +23,9 @@
             </tr>
         </table>
     </form>
+    <div th:if="${param.error}">
+        Invalid username and password.
+    </div>
 </div>
 </body>
 </html>

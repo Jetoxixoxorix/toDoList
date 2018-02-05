@@ -2,6 +2,7 @@ package todolist.service;
 
 import todolist.model.User;
 
+
 public interface IUserManager {
     void userRegistration(User user);
     Long getUserId();

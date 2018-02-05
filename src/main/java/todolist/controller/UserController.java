@@ -46,7 +46,7 @@ public class UserController {
         return "login";
     }
 
-    @PostMapping("/login")
+/*    @PostMapping("/login")
     public String login(@ModelAttribute("userDataLogin") User user) {
         try {
             userValidator.userValidation(user);
@@ -57,7 +57,7 @@ public class UserController {
         }
 
         return "logincompleted";
-    }
+    }*/
 
     @GetMapping("/logout")
     public String logout() {

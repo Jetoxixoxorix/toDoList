@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import todolist.service.ITaskManager;
 import todolist.service.IUserManager;
 import todolist.model.Task;
-import todolist.service.UserManager;
 
 @Controller
 @RequestMapping

@@ -48,5 +48,4 @@ function makeDone(http_request, row) {
             alert('There was a problem with the request. ');
         }
     }
-
 }

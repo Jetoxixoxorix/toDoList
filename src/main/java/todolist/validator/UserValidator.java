@@ -33,7 +33,6 @@ public class UserValidator implements IUserValidator {
         String password = user.getPassword();
         String confirmPassword = user.getConfirmPassword();
 
-
         if (!password.equals(confirmPassword))
             throw new NotMatchingPasswords();
     }

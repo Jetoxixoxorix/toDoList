@@ -5,8 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import todolist.IUserValidator;
-import todolist.WrongPasswordException;
+import todolist.validator.IUserValidator;
 import todolist.model.User;
 import todolist.service.IUserManager;
 

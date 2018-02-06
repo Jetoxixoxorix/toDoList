@@ -1,7 +1,8 @@
-package todolist;
+package todolist.validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import todolist.error.WrongPasswordException;
 import todolist.model.User;
 import todolist.service.IUserManager;
 import todolist.service.UserManager;

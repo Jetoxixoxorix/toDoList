@@ -1,8 +1,8 @@
 package todolist.validator;
 
-import todolist.error.WrongPasswordException;
+import todolist.error.ExistingUsernameException;
 import todolist.model.User;
 
 public interface IUserValidator {
-    void userValidation(User user) throws WrongPasswordException;
+    void userValidation(User user) throws ExistingUsernameException;
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import todolist.error.ExistingUsernameException;
 import todolist.validator.IUserValidator;
 import todolist.model.User;
 import todolist.service.IUserManager;
@@ -34,6 +35,12 @@ public class UserController {
     public String registration(@Valid @ModelAttribute("userData") User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "registration";
+
+        try {
+            userValidator.userValidation(user);
+        } catch (ExistingUsernameException e) {
+            return "registration";
+        }
 
         userManager.userRegistration(user);
         return "completed";

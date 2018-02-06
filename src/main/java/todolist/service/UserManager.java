@@ -15,7 +15,6 @@ public class UserManager implements IUserManager {
     public UserRepository userRepository;
 
     public void userRegistration(User user){
-
         userRepository.save(user);
     }
 

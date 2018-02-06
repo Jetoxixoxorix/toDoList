@@ -19,6 +19,10 @@
                 <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
             </tr>
             <tr>
+                <td>Confirm password:</td>
+                <td><input class="form-control" type="password" th:field="*{confirmPassword}"/></td>
+            </tr>
+            <tr>
                 <td>
                     <button class="btn btn-default" id="register" type="submit">Register</button>
                 </td>

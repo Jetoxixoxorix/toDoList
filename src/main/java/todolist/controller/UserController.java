@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import todolist.error.ExistingUsernameException;
+import todolist.error.NotMatchingPasswords;
 import todolist.validator.IUserValidator;
 import todolist.model.User;
 import todolist.service.IUserManager;
@@ -40,6 +41,8 @@ public class UserController {
             userValidator.userValidation(user);
         } catch (ExistingUsernameException e) {
             return "registration";
+        } catch (NotMatchingPasswords e) {
+            return  "registration";
         }
 
         userManager.userRegistration(user);
@@ -51,19 +54,6 @@ public class UserController {
         model.addAttribute("userDataLogin", new User());
         return "login";
     }
-
-/*    @PostMapping("/login")
-    public String login(@ModelAttribute("userDataLogin") User user) {
-        try {
-            userValidator.userValidation(user);
-        } catch (NullPointerException e) {
-            return "login";
-        } catch (WrongPasswordException e){
-            return "login";
-        }
-
-        return "logincompleted";
-    }*/
 
     @GetMapping("/logout")
     public String logout() {

@@ -22,6 +22,9 @@ public class User {
     @Size(min = 6, max = 20)
     private String password;
 
+    @Transient
+    private String confirmPassword;
+
 
     public Long getUserId() {
         return id;
@@ -43,10 +46,12 @@ public class User {
         this.password = password;
     }
 
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
 
-    @Override
-    public String toString() {
-        return getUserId() + getUsername() + getPassword();
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
 }

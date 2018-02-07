@@ -20,9 +20,8 @@ public class TaskManager implements ITaskManager {
         return dateFormat.format(date);
     }
 
-    public void addNewTask(String description, Long userId) {
-        Task task = new Task();
-        task.setDescription(description);
+    public void addNewTask(Task task, Long userId) {
+        task.setDescription(task.getDescription());
         task.setCreatedAt(getDate());
         task.setArchived(false);
         task.setUserId(userId);

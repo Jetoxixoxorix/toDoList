@@ -19,7 +19,7 @@ public class User {
     private String username;
 
     @NotNull
-    @Size(min = 6, max = 20)
+    @Size(min = 6, max = 60)
     private String password;
 
     @Transient

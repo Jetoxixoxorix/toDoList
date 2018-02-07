@@ -28,8 +28,8 @@ public class MainController {
     }
 
     @PostMapping("/task")
-    public String taskSubmit(@ModelAttribute("task") Task task, String description) {
-        taskManager.addNewTask(description, userManager.getUserId());
+    public String taskSubmit(@ModelAttribute("task") Task task) {
+        taskManager.addNewTask(task, userManager.getUserId());
         return "task";
     }
 

@@ -40,10 +40,10 @@ public class UserController {
         try {
             userValidator.userValidation(user);
         } catch (ExistingUsernameException e) {
-            model.addAttribute("existingUsername", "User with this username already exists!");
+            model.addAttribute("existingUsername", e.getMessage());
             return "registration";
         } catch (NotMatchingPasswords e) {
-            model.addAttribute("wrongPassword", "Passwords aren't the same!");
+            model.addAttribute("wrongPassword", e.getMessage());
             return  "registration";
         }
 

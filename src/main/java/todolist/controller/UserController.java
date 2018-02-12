@@ -33,15 +33,17 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String registration(@Valid @ModelAttribute("userData") User user, BindingResult bindingResult) {
+    public String registration(@Valid @ModelAttribute("userData") User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors())
             return "registration";
 
         try {
             userValidator.userValidation(user);
         } catch (ExistingUsernameException e) {
+            model.addAttribute("existingUsername", "User with this username already exists!");
             return "registration";
         } catch (NotMatchingPasswords e) {
+            model.addAttribute("wrongPassword", "Passwords aren't the same!");
             return  "registration";
         }
 

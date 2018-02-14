@@ -1,9 +1,10 @@
-to do list
+# To do list
 
-Requirements:
+## Requirements:
 - mySQL,
 - Java Development Kit 1.9
 
+## Launching application:
 1.  First thing to do in order to use this application is to install mySQL and JDK in version 1.9. 
 2.  Then you have to create database in mySQL:
 - mysql> create database todolist;

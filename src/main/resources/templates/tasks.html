@@ -33,9 +33,16 @@
                         <button class="btn btn-default">Archive</button>
                     </td>
                 </form>
+
                 <td class="submit">
                     <button class="btn btn-default">Done</button>
                 </td>
+
+                <form action="#" th:action="@{'/delete/' + ${task.id}}" method="get">
+                    <td>
+                        <button class="btn btn-default">Delete</button>
+                    </td>
+                </form>
             </tr>
 
         </table>

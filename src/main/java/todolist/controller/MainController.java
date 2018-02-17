@@ -63,6 +63,12 @@ public class MainController {
         return getTasks(model);
     }
 
+    @GetMapping("/delete/{id}")
+    public String deleteTask(@PathVariable("id") Long id, Model model){
+        taskManager.deleteTask(id);
+        return getTasks(model);
+    }
+
     @GetMapping("/archived")
     public String getArchived(Model model) {
         model.addAttribute("archived", taskManager.getArchived(true,userManager.getUserId()));

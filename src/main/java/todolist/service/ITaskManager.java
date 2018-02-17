@@ -8,6 +8,7 @@ public interface ITaskManager {
     void editTask(String description, Long id);
     void makeDone(Long id);
     void archiveTask(Long id);
+    void deleteTask(Long id);
     List<Task> getArchived(boolean archived, Long userId);
     Task getById(Long id);
 }

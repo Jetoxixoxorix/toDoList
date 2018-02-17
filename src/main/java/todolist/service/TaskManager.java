@@ -56,4 +56,8 @@ public class TaskManager implements ITaskManager {
     public Task getById(Long id){
         return taskRepository.findOne(id);
     }
+
+    public void deleteTask(Long id){
+        taskRepository.delete(id);
+    }
 }

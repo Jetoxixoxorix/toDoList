@@ -1,34 +1,12 @@
 var httpRequest = false;
 
 $(document).ready(function () {
-    $(".submit").on('click', function () {
+    $(".btn-done").on('click', function () {
         var row = $(this).closest("tr");
         var id = row.find(".id").html();
-
-        httpRequest = false;
-
         var url = '/done/' + id;
 
-        if (window.XMLHttpRequest) {
-            httpRequest = new XMLHttpRequest();
-            if (httpRequest.overrideMimeType) {
-                httpRequest.overrideMimeType('text/xml');
-            }
-        } else if (window.ActiveXObject) {
-            try {
-                httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
-            } catch (e) {
-                try {
-                    httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-                } catch (e) {
-                }
-            }
-        }
-
-        if (!httpRequest) {
-            alert('Cannot create an XMLHTTP instance');
-            return false;
-        }
+        ajaxRequest();
 
         httpRequest.onreadystatechange = function () {
             makeDone(httpRequest, row)
@@ -38,6 +16,30 @@ $(document).ready(function () {
     });
 });
 
+function ajaxRequest() {
+    httpRequest = false;
+
+    if (window.XMLHttpRequest) {
+        httpRequest = new XMLHttpRequest();
+        if (httpRequest.overrideMimeType) {
+            httpRequest.overrideMimeType('text/xml');
+        }
+    } else if (window.ActiveXObject) {
+        try {
+            httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+        } catch (e) {
+            try {
+                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (e) {
+            }
+        }
+    }
+
+    if (!httpRequest) {
+        alert('Cannot create an XMLHTTP instance');
+        return false;
+    }
+}
 
 function makeDone(http_request, row) {
 

@@ -8,6 +8,8 @@ import todolist.service.ITaskManager;
 import todolist.service.IUserManager;
 import todolist.model.Task;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping
 public class MainController {

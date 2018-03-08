@@ -10,12 +10,8 @@ import todolist.service.IUserManager;
 @Service
 public class UserValidator implements IUserValidator {
 
-    IUserManager userManager;
-
     @Autowired
-    public UserValidator(IUserManager userManager) {
-        this.userManager = userManager;
-    }
+    IUserManager userManager;
 
     public void userValidation(User user) throws NotMatchingPasswords, ExistingUsernameException {
         checkingUsername(user);

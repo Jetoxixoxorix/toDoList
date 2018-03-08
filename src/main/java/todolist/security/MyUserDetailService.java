@@ -17,12 +17,8 @@ import java.util.Map;
 @Service
 public class MyUserDetailService implements UserDetailsService {
 
-    IUserManager userManager;
-
     @Autowired
-    public MyUserDetailService(IUserManager userManager){
-        this.userManager = userManager;
-    }
+    IUserManager userManager;
 
     @Override
     public UserDetails loadUserByUsername(String username)  {
